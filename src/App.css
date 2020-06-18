@@ -28,6 +28,12 @@
   color: #61dafb;
 }
 
+.overlay-btn {
+  position: absolute;
+  top: -10px;
+  right: -50px;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);
