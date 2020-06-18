@@ -10,7 +10,8 @@ class WorkflowCard extends Component {
     super(props);
 
     this.state = {
-        focus: false
+        focus: false,
+        nodeState: 'P'
     };
   }
   mouseOver = () => {
@@ -22,6 +23,17 @@ class WorkflowCard extends Component {
     this.setState({
       focus:false
     }, console.log('focus off'));
+  }
+  updateNodeState = () => {
+    if(this.state.nodeState === 'P') {
+        this.setState({
+            nodeState: 'C'
+        })
+    } else if(this.state.nodeState === 'C') {
+        this.setState({
+            nodeState: 'P'
+        })
+    }
   }
   render() {
     return (
@@ -39,6 +51,11 @@ class WorkflowCard extends Component {
               {this.state.focus && <Button className="overlay-btn" variant='primary'>
               Go somewhere
             </Button>}
+            <Button className="btn-circle btn-sm" variant='primary'
+            onClick={this.updateNodeState}
+            >
+              {this.state.nodeState}
+            </Button>
             </Card>
 
 

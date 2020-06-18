@@ -33,6 +33,14 @@
   top: -10px;
   right: -50px;
 }
+.btn-circle.btn-sm {
+  width: 30px;
+  height: 30px;
+  padding: 6px 0px;
+  border-radius: 15px;
+  font-size: 8px;
+  text-align: center;
+}
 
 @keyframes App-logo-spin {
   from {
