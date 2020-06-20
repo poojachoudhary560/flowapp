@@ -1,91 +1,84 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
+
+import { FaTrashAlt, FaCheckCircle, FaCheck } from 'react-icons/fa';
 import Col from 'react-bootstrap/Col';
-import Container from 'react-bootstrap/Container';
+import Row from 'react-bootstrap/Row';
 
 class WorkflowCard extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-        focus: false,
-        nodeState: 'P'
+      focus: false,
+      nodeState: 'P'
     };
   }
   mouseOver = () => {
-    this.setState({
-      focus:true
-    }, console.log('focus on'));
-  }
+    this.setState(
+      {
+        focus: true
+      },
+      console.log('focus on')
+    );
+  };
   mouseOut = () => {
-    this.setState({
-      focus:false
-    }, console.log('focus off'));
-  }
+    this.setState(
+      {
+        focus: false
+      },
+      console.log('focus off')
+    );
+  };
   updateNodeState = () => {
-    if(this.state.nodeState === 'P') {
-        this.setState({
-            nodeState: 'C'
-        })
-    } else if(this.state.nodeState === 'C') {
-        this.setState({
-            nodeState: 'P'
-        })
+    if (this.state.nodeState === 'P') {
+      this.setState({
+        nodeState: 'C'
+      });
+    } else if (this.state.nodeState === 'C') {
+      this.setState({
+        nodeState: 'P'
+      });
     }
-  }
+  };
   render() {
+    const { name, id, status, deleted } = this.props.workflow;
     return (
       <>
-      <Container>
-        <Row>
-          <Col style={{border: '1px solid black'}}>
-            <Card style={{ width: '18rem' }}
-            onMouseEnter={this.mouseOver} onMouseLeave={this.mouseOut}
-            >
-              <Card.Body>
-                <Card.Text>Workflow name</Card.Text>
-                <Card.Text>COMPLETED</Card.Text>
-              </Card.Body>
-              {this.state.focus && <Button className="overlay-btn" variant='primary'>
-              Go somewhere
-            </Button>}
-            <Button className="btn-circle btn-sm" variant='primary'
-            onClick={this.updateNodeState}
-            >
-              {this.state.nodeState}
-            </Button>
-            </Card>
-
-
-          </Col>
-          <Col style={{border: '1px solid black'}}>
-            <Card style={{ width: '18rem' }}>
-              <Card.Body>
-                <Card.Text>Workflow name</Card.Text>
-                <Card.Text>COMPLETED</Card.Text>
-              </Card.Body>
-            </Card>
-
-            <Button variant='primary'>
-              Go somewhere
-            </Button>
-          </Col>
-          <Col style={{border: '1px solid black'}}>
-            <Card style={{ width: '18rem' }}>
-              <Card.Body>
-                <Card.Text>Workflow name</Card.Text>
-                <Card.Text>COMPLETED</Card.Text>
-              </Card.Body>
-            </Card>
-
-            <Button variant='primary'>
-              Go somewhere
-            </Button>
-          </Col>
-        </Row>
-        </Container>
+        <Col style={{ border: '1px solid black' }}>
+          <Card
+            style={{ width: '18rem' }}
+            onMouseEnter={this.mouseOver}
+            onMouseLeave={this.mouseOut}
+          >
+            <Card.Body>
+              <Card.Text>{name}</Card.Text>
+              <Row>
+                <Col>
+                  <Card.Text>{status}</Card.Text>
+                </Col>
+                <Col>
+                  <Button
+                    className='btn-circle btn-sm'
+                    variant='primary'
+                    onClick={this.updateNodeState}
+                  >
+                    <FaCheck />
+                  </Button>
+                </Col>
+              </Row>
+            </Card.Body>
+            {this.state.focus && (
+              <Button
+                className='overlay-btn btn-circle btn-sm'
+                variant='primary'
+              >
+                <FaTrashAlt />
+              </Button>
+            )}
+          </Card>
+        </Col>
       </>
     );
   }
