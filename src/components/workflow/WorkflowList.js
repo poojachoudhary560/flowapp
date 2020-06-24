@@ -7,6 +7,7 @@ import Row from 'react-bootstrap/Row';
 import Container from 'react-bootstrap/Container';
 
 import workflowData from '../../api/workflow';
+import AppContext from '../../context/AppContext';
 
 class WorkflowList extends Component {
   constructor(props) {
@@ -16,26 +17,38 @@ class WorkflowList extends Component {
       workflowList: []
     };
   }
+  static contextType = AppContext;
   componentDidMount() {
+
+    //this.props.context.getWorkflows();
+    console.log(this.context);
+    this.context.getWorkflows();
     console.log(workflowData);
-    this.setState({
-      workflowList: workflowData
-    });
+
+  }
+
+  deleteWorkflow = (e) => {
+      console.log(e.target.value + "   " +e.target.name)
+      this.context.deleteWorkflow(e.target.value)
   }
 
   render() {
+    let { workflows } = this.context.state;
     return (
       <>
         <WorkflowBar />
-        <Container>
-          <Row>
+<Container>
+<Row>
 
-              {this.state.workflowList.map((workflow) => {
-                return <WorkflowCard key={workflow.id} workflow={workflow}/>;
-              })}
+    {workflows.map((workflow) => {
+      return <WorkflowCard key={workflow.id}
+      workflow={workflow}
+      deleteWorkflow={this.deleteWorkflow}
+      />;
+    })}
 
-          </Row>
-        </Container>
+</Row>
+</Container>
       </>
     );
   }

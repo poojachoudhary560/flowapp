@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import {Link } from 'react-router-dom';
 class WorkflowBar extends Component {
   constructor(props) {
     super(props);
@@ -32,7 +33,10 @@ class WorkflowBar extends Component {
               </Form.Group>
             </Col>
             <Col>
-              <Button variant='primary'>Create Workflow</Button>{' '}
+            <Link to="/add">
+            <Button variant='primary'>Create Workflow</Button>{' '}
+            </Link>
+
             </Col>
           </Row>
         </Container>

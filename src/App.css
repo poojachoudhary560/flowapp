@@ -42,6 +42,43 @@
   text-align: center;
 }
 
+button > svg {
+  pointer-events: none;
+  height: 12px;
+  width: 12px;
+}
+
+.active-green {
+  background: green;
+}
+
+.active-grey {
+  background: grey;
+}
+.active-blue {
+  background: blue;
+}
+
+.btn-flat {
+  background-color: purple;
+  color: white;
+}
+.btn-flat:hover {
+  color: burlywood
+}
+.btn-pending {
+  background-color: grey;
+  color: #fff;
+}
+.btn-in-progress {
+  background-color: blue;
+  color: #fff;
+}
+.btn-completed {
+  background-color: green;
+  color: #fff;
+}
+
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

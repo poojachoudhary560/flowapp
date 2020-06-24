@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import { FaTrashAlt, FaCheckCircle, FaCheck } from 'react-icons/fa';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
+import { Link } from 'react-router-dom';
 
 class WorkflowCard extends Component {
   constructor(props) {
@@ -32,36 +33,55 @@ class WorkflowCard extends Component {
     );
   };
   updateNodeState = () => {
-    if (this.state.nodeState === 'P') {
-      this.setState({
-        nodeState: 'C'
-      });
-    } else if (this.state.nodeState === 'C') {
-      this.setState({
-        nodeState: 'P'
-      });
+    const { name, id, status, deleted, nodes } = this.props.workflow;
+    let flag = 0;
+    for(let i=0; i<nodes.length; i++) {
+
+      if(nodes[i].status !== 'completed') {
+        break;
+      }
+      flag += 1;
     }
+    if(flag < nodes.length) {
+      // cannot mark complete
+      console.log("cannot mark complete");
+    } else {
+      // mark status complete and save
+      console.log("mark status complete");
+    }
+  };
+  editWorkflow() {}
+
+  deleteWorkflow = (e) => {
+    this.props.deleteWorkflow(e);
   };
   render() {
     const { name, id, status, deleted } = this.props.workflow;
     return (
       <>
-        <Col style={{ border: '1px solid black' }}>
+        <Col xs={6} md={4} style={{ border: '1px solid black' }}>
           <Card
             style={{ width: '18rem' }}
             onMouseEnter={this.mouseOver}
             onMouseLeave={this.mouseOut}
           >
             <Card.Body>
-              <Card.Text>{name}</Card.Text>
+              <Card.Text>
+                <Link to={`/edit/${id}`}>
+                  <Button variant='primary' onClick={this.editWorkflow}>
+                    {name}
+                  </Button>
+                </Link>
+              </Card.Text>
+
               <Row>
                 <Col>
                   <Card.Text>{status}</Card.Text>
                 </Col>
                 <Col>
                   <Button
-                    className='btn-circle btn-sm'
-                    variant='primary'
+                    variant={status}
+                    className={`btn-circle btn-sm `}
                     onClick={this.updateNodeState}
                   >
                     <FaCheck />
@@ -72,7 +92,10 @@ class WorkflowCard extends Component {
             {this.state.focus && (
               <Button
                 className='overlay-btn btn-circle btn-sm'
-                variant='primary'
+                style={{ background: 'red' }}
+                name='delete'
+                value={id}
+                onClick={this.deleteWorkflow}
               >
                 <FaTrashAlt />
               </Button>

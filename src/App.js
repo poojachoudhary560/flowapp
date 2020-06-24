@@ -6,28 +6,34 @@ import WorkflowBar from './components/workflow/WorkflowBar';
 import NodeBar from './components/node/NodeBar';
 import WorkflowCard from './components/workflow/WorkflowCard';
 import WorkflowList from './components/workflow/WorkflowList';
-
+import NodeFlow from './components/node/NodeFlow';
+import AppProvider from './context/AppProvider';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 class App extends Component {
   state = {
-    isLoggedIn: true
-  }
+    isLoggedIn: true,
+    editWorkflow: false
+  };
   checkLoggedStatus = (val) => {
-    if(val === 'in') {
+    if (val === 'in') {
       this.setState({
         isLoggedIn: true
       });
     }
-  }
+  };
   render() {
     return (
-      <div className="App">
-
-        <NavBarComponent />
-
-        {!this.state.isLoggedIn && <LoginPage isLoggedIn={this.state.isLoggedIn} loggedStatus={this.checkLoggedStatus}/>}
-        {this.state.isLoggedIn && <WorkflowList />}
-
-
+      <div className='App'>
+        <Router>
+          <AppProvider>
+            <NavBarComponent />
+            <Switch>
+              <Route path='/' exact component={WorkflowList} />
+              <Route path='/add' component={NodeFlow} />
+              <Route path='/edit/:id' component={NodeFlow} />
+            </Switch>
+          </AppProvider>
+        </Router>
       </div>
     );
   }
