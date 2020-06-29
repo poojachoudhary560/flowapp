@@ -7,6 +7,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { Link } from 'react-router-dom';
 
+
 class WorkflowCard extends Component {
   constructor(props) {
     super(props);
@@ -45,9 +46,14 @@ class WorkflowCard extends Component {
     if(flag < nodes.length) {
       // cannot mark complete
       console.log("cannot mark complete");
+      this.props.notify();
+
     } else {
       // mark status complete and save
       console.log("mark status complete");
+      const newData = {...this.props.workflow};
+      newData.status = 'completed'
+      this.props.updateWorkflowStatus(newData)
     }
   };
   editWorkflow() {}
@@ -84,6 +90,7 @@ class WorkflowCard extends Component {
                     className={`btn-circle btn-sm `}
                     onClick={this.updateNodeState}
                   >
+
                     <FaCheck />
                   </Button>
                 </Col>
@@ -102,6 +109,7 @@ class WorkflowCard extends Component {
             )}
           </Card>
         </Col>
+
       </>
     );
   }

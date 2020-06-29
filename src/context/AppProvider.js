@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import AppContext from './AppContext';
+import { withRouter } from 'react-router-dom'
 import workflowData from '../api/workflow';
 import axios from 'axios';
 class AppProvider extends Component {
@@ -69,12 +70,20 @@ class AppProvider extends Component {
   getWorkflow(id) {
     //console.log(this.props);
     console.log(this.state.workflows);
+    /*
     let val = this.state.workflows.find((item) => {
       return item.id === id;
-    });
+    }); */
+    let val;
+    axios.get(`http://localhost:3001/workflows/${id}`).then(res => {
+      console.log(res.data);
+      this.setState({
+        workflow: res.data
+      })
+    })
     console.log(val);
 
-    return val;
+    //return val;
   }
   setWorkflow(name, value) {
     this.setState({
@@ -146,13 +155,29 @@ class AppProvider extends Component {
       console.log(workflows);
     }
     console.log(data);
+    console.log(this.props);
 
     this.setState({
       workflows,
       workflowsOriginal: workflows
-    });
+    }, () => this.props.history.goBack());
   };
-
+  updateWorkflowState = (data) => {
+    const headers = {
+      'Content-Type': 'application/json'
+      //'Authorization': 'JWT fefege...'
+    };
+    axios
+        .put(`http://localhost:3001/workflows/${data.id}`, data, {
+          headers: headers
+        })
+        .then((response) => {
+          console.log(response);
+          if (response.status === 200 || response.status === 201) {
+            this.getWorkflows();
+          }
+        });
+  }
   searchWorkflows = (val) => {
     /*  console.log(this.state.workflowsOriginal)
    var newWorkflows =  this.state.workflowsOriginal.filter(item => {
@@ -242,7 +267,8 @@ class AppProvider extends Component {
           saveWorkflow: this.saveWorkflow,
           deleteWorkflow: this.deleteWorkflow,
           searchWorkflows: this.searchWorkflows,
-          filterWorkflows: this.filterWorkflows
+          filterWorkflows: this.filterWorkflows,
+          updateWorkflowState: this.updateWorkflowState
         }}
       >
         {this.props.children}
@@ -251,4 +277,4 @@ class AppProvider extends Component {
   }
 }
 
-export default AppProvider;
+export default withRouter(AppProvider);

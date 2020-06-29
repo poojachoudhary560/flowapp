@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Form from 'react-bootstrap/Form';
 import Button from 'react-bootstrap/Button'
+import UserContext from '../context/user/UserContext';
 class LoginPage extends Component {
   constructor(props) {
     super(props);
@@ -11,6 +12,8 @@ class LoginPage extends Component {
       remember: false
     };
   }
+  static contextType = UserContext;
+
   handleChange = (event) => {
     console.log(event.target);
     const {name, value} = event.target;
@@ -24,7 +27,8 @@ class LoginPage extends Component {
     alert('submitted');
  // change props here
    if(this.state.email && this.state.password) {
-     this.props.loggedStatus('in');
+     console.log(this.context)
+     this.context.login(this.state);
    }
   }
   render() {

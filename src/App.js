@@ -11,6 +11,7 @@ import AppProvider from './context/AppProvider';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 //import createHistory from 'history/createBrowserHistory'
 import history from './router/history';
+import UserProvider from './context/user/UserProvider';
 
 class App extends Component {
   state = {
@@ -28,14 +29,17 @@ class App extends Component {
     return (
       <div className='App'>
         <Router history={history}>
+          <UserProvider>
           <AppProvider>
             <NavBarComponent />
             <Switch>
               <Route path='/' exact component={WorkflowList} />
               <Route path='/add' component={NodeFlow} />
               <Route path='/edit/:id' component={NodeFlow} />
+              <Route path='/login' component={LoginPage} />
             </Switch>
           </AppProvider>
+          </UserProvider>
         </Router>
       </div>
     );

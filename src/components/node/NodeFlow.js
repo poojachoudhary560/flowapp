@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import NodeBar from './NodeBar';
 
 import Row from 'react-bootstrap/Row';
-
+import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 
 import workflowData from '../../api/workflow';
@@ -44,13 +44,16 @@ class NodeFlow extends Component {
 
     if (this.props.match.params.id) {
       //
-      data = this.context.getWorkflow(parseInt(this.props.match.params.id));
+      /*
+      data = await this.context.getWorkflow(parseInt(this.props.match.params.id));
       console.log(data);
       if (data === undefined) {
         await this.context.getWorkflows();
-        data = this.context.getWorkflow(parseInt(this.props.match.params.id));
-      }
-      const { id, name, deleted, nodes, status } = data;
+        data = await this.context.getWorkflow(parseInt(this.props.match.params.id));
+      } */
+      axios.get(`http://localhost:3001/workflows/${this.props.match.params.id}`).then(res => {
+      console.log(res.data);
+      const { id, name, deleted, nodes, status } = res.data;
       this.setState({
         id: id,
         name: name,
@@ -58,8 +61,38 @@ class NodeFlow extends Component {
         nodes: nodes,
         status: status
       });
+    })
+    /*
+      const { id, name, deleted, nodes, status } = this.context.state.;
+      this.setState({
+        id: id,
+        name: name,
+        deleted: deleted,
+        nodes: nodes,
+        status: status
+      }); */
     }
   }
+
+  shuffle = (array) => {
+    var counter = array.length,
+      temp,
+      index;
+    // While there are elements in the array
+    while (counter > 0) {
+      // Pick a random index
+      index = Math.floor(Math.random() * counter);
+
+      // Decrease counter by 1
+      counter--;
+
+      // And swap the last element with it
+      temp = array[counter];
+      array[counter] = array[index];
+      array[index] = temp;
+    }
+    return array;
+  };
 
   handleChange = (event) => {
     let { value } = event.target;
@@ -100,7 +133,7 @@ class NodeFlow extends Component {
     });
     console.log(newArray);
   };
-  handleClick = (event) => {
+   handleClick = async (event) => {
     let { name, value } = event.target;
     if (name === 'add') {
       let node = {
@@ -121,22 +154,29 @@ class NodeFlow extends Component {
       //provide if for save or update
       let currentPath = this.props.location.pathname;
       if (currentPath.includes('/edit')) {
-        this.context.saveWorkflow({ ...this.state }, 'edit');
+        await this.context.saveWorkflow({ ...this.state }, 'edit');
       } else if (currentPath.includes('/add')) {
-        this.context.saveWorkflow({ ...this.state }, 'add');
+        await this.context.saveWorkflow({ ...this.state }, 'add');
       }
+
     } else if (name === 'shuffle') {
-      console.log(this.props);
-      this.props.history.goBack();
+      console.log(this.state.nodes);
+      //this.props.history.goBack();
+      let copy = [...this.state.nodes];
+      let shuffledArr = this.shuffle(copy);
+      console.log(shuffledArr);
+      this.setState({
+        nodes: shuffledArr
+      });
     } else if (name === 'delete') {
       console.log(this.state.nodes);
       //this.props.history.goBack();
-      let newNodes = [...this.state.nodes]
-      let removeLast = newNodes.splice(-1,1);
-      console.log(newNodes)
+      let newNodes = [...this.state.nodes];
+      let removeLast = newNodes.splice(-1, 1);
+      console.log(newNodes);
       this.setState({
         nodes: newNodes
-      })
+      });
     }
   };
 
@@ -150,7 +190,7 @@ class NodeFlow extends Component {
             handleNameChange={this.handleChange}
             handleClick={this.handleClick}
           />
-          <hr className="line-details" />
+          <hr className='line-details' />
           <Row>
             <NodeList
               nodes={this.state.nodes}
