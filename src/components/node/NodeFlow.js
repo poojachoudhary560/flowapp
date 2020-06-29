@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import NodeBar from './NodeBar';
 
-
 import Row from 'react-bootstrap/Row';
 
 import Container from 'react-bootstrap/Container';
@@ -17,38 +16,39 @@ class NodeFlow extends Component {
 
     this.state = {
       id: Date.now(),
-      name: "", //name
+      name: '', //name
       status: 'pending',
       deleted: false,
       nodes: [
         {
-          title: "",
-          content: "",
+          title: '',
+          content: '',
           id: 1,
           status: 'pending'
         }
-      ]
-      }
+      ],
+      mode: ''
+    };
   }
   static contextType = AppContext;
   async componentDidMount() {
-
     // get id for next workflow and set
-   // let id = this.context.state.workflows.length;
-   // console.log(id)
-   console.log(this.state.id)
+    // let id = this.context.state.workflows.length;
+    // console.log(id)
+    console.log(this.state.id);
 
     console.log(this.props);
+
     //this.props.match.params.id
     let data = {};
 
-    if(this.props.match.params.id) {
+    if (this.props.match.params.id) {
       //
-      data = this.context.getWorkflow(parseInt(this.props.match.params.id))
+      data = this.context.getWorkflow(parseInt(this.props.match.params.id));
       console.log(data);
-      if(data === undefined) {
+      if (data === undefined) {
         await this.context.getWorkflows();
-        data = this.context.getWorkflow(parseInt(this.props.match.params.id))
+        data = this.context.getWorkflow(parseInt(this.props.match.params.id));
       }
       const { id, name, deleted, nodes, status } = data;
       this.setState({
@@ -62,78 +62,93 @@ class NodeFlow extends Component {
   }
 
   handleChange = (event) => {
-
-    let {value} = event.target;
+    let { value } = event.target;
 
     this.setState({
       name: value //name
     });
-  }
+  };
   handleNodeChange = (event, id) => {
-    console.log(event.target.value +'..... ' + id);
-    let {name, value} = event.target;
-    if(name === 'status') {
+    console.log(event.target.value + '..... ' + id);
+    let { name, value } = event.target;
+    if (name === 'status') {
       let changeStateOrder = {
-        'pending': 'in-progress',
+        pending: 'in-progress',
         'in-progress': 'completed',
-        'completed': 'pending'
-      }
+        completed: 'pending'
+      };
       value = changeStateOrder[value];
     }
-    console.log(event.target.value +'..... ' + id);
-    let newArr = this.state.nodes.filter(item => item.id === id)
+    console.log(event.target.value + '..... ' + id);
+    let newArr = this.state.nodes.filter((item) => item.id === id);
     let [item] = newArr;
     let updatedNode = {
       ...item,
       [name]: value
-    }
+    };
     console.log(newArr);
     console.log(updatedNode);
     console.log(this.state.nodes);
-    const indexOldElement = this.state.nodes.findIndex(node => node.id === id);
-    const newArray = Object.assign([...this.state.nodes], {[indexOldElement]: updatedNode});
+    const indexOldElement = this.state.nodes.findIndex(
+      (node) => node.id === id
+    );
+    const newArray = Object.assign([...this.state.nodes], {
+      [indexOldElement]: updatedNode
+    });
     this.setState({
       nodes: newArray
-    })
+    });
     console.log(newArray);
-  }
+  };
   handleClick = (event) => {
-    let {name, value} = event.target;
-    if(name === 'add') {
+    let { name, value } = event.target;
+    if (name === 'add') {
       let node = {
-        name: "",
-        description: "",
-        id: this.state.nodes.length >0 ? this.state.nodes.length + 1 : 1
-      }
-      let nodes = [...this.state.nodes, node]
+        title: '',
+        // id: 1,
+        content: '',
+        status: 'pending',
+
+        //name: "",
+        //description: "",
+        id: this.state.nodes.length > 0 ? this.state.nodes.length + 1 : 1
+      };
+      let nodes = [...this.state.nodes, node];
       this.setState({
         nodes
       });
-    } else if(name === 'save') {
+    } else if (name === 'save') {
       //provide if for save or update
-      this.context.saveWorkflow({...this.state});
+      let currentPath = this.props.location.pathname;
+      if (currentPath.includes('/edit')) {
+        this.context.saveWorkflow({ ...this.state }, 'edit');
+      } else if (currentPath.includes('/add')) {
+        this.context.saveWorkflow({ ...this.state }, 'add');
+      }
+    } else if (name === 'shuffle') {
+      console.log(this.props);
+      this.props.history.goBack();
     }
-
-  }
+  };
 
   render() {
     return (
       <>
-
         <Container fluid>
           {this.state.name}
-        <NodeBar
-          workspaceName={this.state.name}
-          handleNameChange={this.handleChange}
-          handleClick={this.handleClick}
-        />
-            <Row>
-            <NodeList nodes={this.state.nodes}
-            handleNodeChange={this.handleNodeChange}
+          <NodeBar
+            workspaceName={this.state.name}
+            handleNameChange={this.handleChange}
+            handleClick={this.handleClick}
+          />
+          <hr className="line-details" />
+          <Row>
+            <NodeList
+              nodes={this.state.nodes}
+              handleNodeChange={this.handleNodeChange}
             />
-            </Row>
+          </Row>
         </Container>
-
       </>
     );
   }

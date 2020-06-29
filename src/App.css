@@ -71,14 +71,46 @@ button > svg {
   color: #fff;
 }
 .btn-in-progress {
-  background-color: blue;
+  background-color:#007bff;
   color: #fff;
 }
 .btn-completed {
-  background-color: green;
+  background-color:#28a745;
   color: #fff;
 }
+.btn-purple {
+  background-color: purple;
+  color: white;
+}
+.btn-purple:hover {
+  color: white;
+  background-color: #6C006C;
+}
+.nav-bar-properties {
+  background-color: purple;
+  color: #fff;
+}
+.filter .dropdown-toggle:after { content: none }
 
+
+.node-bar {
+  margin-top: 20px;
+
+}
+.line-details {
+  margin: 0 auto;
+  color: black;
+  background: black;
+
+}
+.node-cards-layout {
+  margin-top: 30px;
+}
+
+.input-group-text {
+  background-color: #fff;
+
+  }
 @keyframes App-logo-spin {
   from {
     transform: rotate(0deg);

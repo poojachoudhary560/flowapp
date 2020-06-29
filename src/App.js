@@ -9,6 +9,9 @@ import WorkflowList from './components/workflow/WorkflowList';
 import NodeFlow from './components/node/NodeFlow';
 import AppProvider from './context/AppProvider';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+//import createHistory from 'history/createBrowserHistory'
+import history from './router/history';
+
 class App extends Component {
   state = {
     isLoggedIn: true,
@@ -24,7 +27,7 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <Router>
+        <Router history={history}>
           <AppProvider>
             <NavBarComponent />
             <Switch>

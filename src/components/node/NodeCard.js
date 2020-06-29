@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-
-import { FaTrashAlt, FaCheck } from 'react-icons/fa';
+import Row from 'react-bootstrap/Row';
+import { FaTrashAlt, FaCheck, FaLongArrowAltRight } from 'react-icons/fa';
 import Col from 'react-bootstrap/Col';
-
+import arrow_right from '../../images/arrow_right.png';
 import Form from 'react-bootstrap/Form';
 
 class NodeCard extends Component {
@@ -50,8 +50,12 @@ class NodeCard extends Component {
     return (
       <>
 
-        <Col style={{ border: '1px solid black' }}>
-          <Card style={{ width: '18rem' }}>
+        <Col xs={12} md={4} style={{ border: '1px solid black' }}
+          className="node-cards-layout"
+        >
+          <Row>
+            <Col xs={8} md={8}>
+            <Card style={{ width: '18rem' }}>
             <Card.Body>
             {title} {content} {status}
               <Form>
@@ -63,21 +67,14 @@ class NodeCard extends Component {
                   />
                 </Form.Group>
                 <Form.Group controlId='exampleForm.ControlTextarea1'>
-                  <Form.Control as='textarea' rows='3'
+                  <Form.Control as='textarea' rows='12'
                   name="content"
                   value={content}
                   onChange={this.handleChange}
                   />
                 </Form.Group>
               </Form>
-              <Button className={`btn-circle btn-sm `}
-                    name="status"
-                    value={status}
-                    variant="flat"
-                    onClick={this.changeColor}
-            >
-              <FaCheck />
-            </Button>
+
             </Card.Body>
 
             <Button className={`overlay-btn btn-circle btn-sm `}
@@ -89,6 +86,14 @@ class NodeCard extends Component {
               <FaCheck />
             </Button>
           </Card>
+            </Col>
+            <Col xs={4} md={4}>
+              <img style={{width:'100%'}}  src={arrow_right} alt="Right Arrow" />
+
+            </Col>
+          </Row>
+
+
         </Col>
       </>
     );

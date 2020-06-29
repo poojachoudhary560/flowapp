@@ -11,10 +11,10 @@ class NavBarComponent extends Component {
   render() {
     return (
       <>
-        <Navbar bg='light'>
+        <Navbar className="nav-bar-properties">
           <Navbar.Brand>
           <Link to="/">
-            Brawwnd link
+            FLOWAPP
             </Link>
             </Navbar.Brand>
 

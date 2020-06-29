@@ -6,7 +6,7 @@ import Row from 'react-bootstrap/Row';
 
 import Container from 'react-bootstrap/Container';
 
-import workflowData from '../../api/workflow';
+//import workflowData from '../../api/workflow';
 import AppContext from '../../context/AppContext';
 
 class WorkflowList extends Component {
@@ -14,41 +14,53 @@ class WorkflowList extends Component {
     super(props);
 
     this.state = {
-      workflowList: []
+    //  workflowList: []
+      search: ''
     };
   }
   static contextType = AppContext;
   componentDidMount() {
-
     //this.props.context.getWorkflows();
     console.log(this.context);
     this.context.getWorkflows();
-    console.log(workflowData);
-
+    //console.log(workflowData);
   }
 
   deleteWorkflow = (e) => {
-      console.log(e.target.value + "   " +e.target.name)
-      this.context.deleteWorkflow(e.target.value)
+    console.log(e.target.value + '   ' + e.target.name);
+    this.context.deleteWorkflow(e.target.value);
+  };
+
+  handleSearchChange = (val) => {
+   /* const	{name, value} = e.target;
+    this.setState({
+      [name]: value
+    }) */
+    this.context.searchWorkflows(val);
+
+
   }
 
   render() {
     let { workflows } = this.context.state;
     return (
       <>
-        <WorkflowBar />
-<Container>
-<Row>
-
-    {workflows.map((workflow) => {
-      return <WorkflowCard key={workflow.id}
-      workflow={workflow}
-      deleteWorkflow={this.deleteWorkflow}
-      />;
-    })}
-
-</Row>
-</Container>
+        <WorkflowBar
+        handleSearchChange={this.handleSearchChange}
+        />
+        <Container>
+          <Row>
+            {workflows.map((workflow) => {
+              return (
+                <WorkflowCard
+                  key={workflow.id}
+                  workflow={workflow}
+                  deleteWorkflow={this.deleteWorkflow}
+                />
+              );
+            })}
+          </Row>
+        </Container>
       </>
     );
   }

@@ -59,16 +59,16 @@ class WorkflowCard extends Component {
     const { name, id, status, deleted } = this.props.workflow;
     return (
       <>
-        <Col xs={6} md={4} style={{ border: '1px solid black' }}>
+        <Col xs={6} md={4} className="node-cards-layout">
           <Card
-            style={{ width: '18rem' }}
+            style={{ width: '18rem', boxShadow: this.state.focus ? "1px 0px 1px #9E9E9E" : '' }}
             onMouseEnter={this.mouseOver}
             onMouseLeave={this.mouseOut}
           >
             <Card.Body>
               <Card.Text>
                 <Link to={`/edit/${id}`}>
-                  <Button variant='primary' onClick={this.editWorkflow}>
+                  <Button block variant="outline-dark" onClick={this.editWorkflow}>
                     {name}
                   </Button>
                 </Link>

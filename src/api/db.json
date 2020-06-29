@@ -1,0 +1,131 @@
+{
+  "workflows": [
+    {
+      "id": 1,
+      "name": "Workflow 1",
+      "status": "completed",
+      "deleted": false,
+      "nodes": [
+        {
+          "id": 0,
+          "title": "Node 1",
+          "content": "Content 1",
+          "status": "pending"
+        },
+        {
+          "id": 1,
+          "title": "Node 2",
+          "content": "Content 2",
+          "status": "in-progress"
+        },
+        {
+          "id": 2,
+          "title": "Node 3",
+          "content": "Content 3",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": 3,
+      "name": "Workflow 3",
+      "status": "pending",
+      "deleted": false,
+      "nodes": [
+        {
+          "id": 0,
+          "title": "Node 1",
+          "content": "Content 1",
+          "status": "pending"
+        },
+        {
+          "id": 1,
+          "title": "Node 2",
+          "content": "Content 2",
+          "status": "in-progress"
+        },
+        {
+          "id": 2,
+          "title": "Node 3",
+          "content": "Content 3",
+          "status": "completed"
+        }
+      ]
+    },
+    {
+      "id": 1593389309546,
+      "name": "kush",
+      "status": "pending",
+      "deleted": false,
+      "nodes": [
+        {
+          "title": "lion",
+          "content": "ysysys",
+          "id": 1,
+          "status": "pending"
+        }
+      ],
+      "mode": ""
+    },
+    {
+      "id": 1593394257203,
+      "name": "ping pong",
+      "status": "pending",
+      "deleted": false,
+      "nodes": [
+        {
+          "title": "ping pong",
+          "content": "ping pong 456",
+          "id": 1,
+          "status": "pending"
+        }
+      ],
+      "mode": ""
+    },
+    {
+      "id": 1593397914173,
+      "name": "kush1",
+      "status": "pending",
+      "deleted": false,
+      "nodes": [
+        {
+          "title": "shsjej",
+          "content": "11",
+          "id": 1,
+          "status": "pending"
+        }
+      ],
+      "mode": ""
+    },
+    {
+      "id": 1593397925460,
+      "name": "kush 2",
+      "status": "pending",
+      "deleted": false,
+      "nodes": [
+        {
+          "title": "sss",
+          "content": "ss",
+          "id": 1,
+          "status": "pending"
+        }
+      ],
+      "mode": ""
+    },
+    {
+      "id": 1593397964151,
+      "name": "kush 3 pooja",
+      "status": "pending",
+      "deleted": false,
+      "nodes": [
+        {
+          "title": "ss",
+          "content": "ss",
+          "id": 1,
+          "status": "pending"
+        }
+      ],
+      "mode": ""
+    }
+  ]
+}
