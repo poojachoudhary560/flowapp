@@ -12,8 +12,8 @@ class NavBarComponent extends Component {
     return (
       <>
         <Navbar className="nav-bar-properties">
-          <Navbar.Brand>
-          <Link to="/">
+          <Navbar.Brand className="home-nav">
+          <Link to="/" className="home-link" >
             FLOWAPP
             </Link>
             </Navbar.Brand>

@@ -128,6 +128,15 @@ class NodeFlow extends Component {
     } else if (name === 'shuffle') {
       console.log(this.props);
       this.props.history.goBack();
+    } else if (name === 'delete') {
+      console.log(this.state.nodes);
+      //this.props.history.goBack();
+      let newNodes = [...this.state.nodes]
+      let removeLast = newNodes.splice(-1,1);
+      console.log(newNodes)
+      this.setState({
+        nodes: newNodes
+      })
     }
   };
 

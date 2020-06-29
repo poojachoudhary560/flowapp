@@ -50,12 +50,12 @@ class NodeCard extends Component {
     return (
       <>
 
-        <Col xs={12} md={4} style={{ border: '1px solid black' }}
+        <Col xs={12} md={4}
           className="node-cards-layout"
         >
           <Row>
-            <Col xs={8} md={8}>
-            <Card style={{ width: '18rem' }}>
+            <Col xs={7} md={7}>
+            <Card >
             <Card.Body>
             {title} {content} {status}
               <Form>
@@ -77,7 +77,7 @@ class NodeCard extends Component {
 
             </Card.Body>
 
-            <Button className={`overlay-btn btn-circle btn-sm `}
+            <Button className={`overlay-btn-node btn-circle btn-sm `}
             variant={status}
                     name="status"
                     value={status}
@@ -87,8 +87,14 @@ class NodeCard extends Component {
             </Button>
           </Card>
             </Col>
-            <Col xs={4} md={4}>
-              <img style={{width:'100%'}}  src={arrow_right} alt="Right Arrow" />
+            <Col xs={5} md={5}
+              className="arrow-col"
+            >
+              {this.props.showArrow && <img
+              style={{width:'100%', marginTop: 'auto', marginBottom: 'auto'}}
+              src={arrow_right} alt="Right Arrow"
+
+              />}
 
             </Col>
           </Row>

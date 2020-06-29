@@ -46,7 +46,11 @@ class NodeBar extends Component {
                 </Button>{' '}
               </Col>
               <Col>
-                <Button variant='danger' block>
+                <Button
+                variant='danger' block
+                onClick={this.props.handleClick}
+                name='delete'
+                >
                   {' '}
                   <FaTimes /> Delete
                 </Button>{' '}
