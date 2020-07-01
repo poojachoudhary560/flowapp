@@ -1,35 +1,8 @@
 {
   "workflows": [
     {
-      "id": 1,
-      "name": "Workflow 1 hjhjjj",
-      "status": "completed",
-      "deleted": false,
-      "nodes": [
-        {
-          "id": 0,
-          "title": "Node 1",
-          "content": "Content 1",
-          "status": "pending"
-        },
-        {
-          "id": 1,
-          "title": "Node 2",
-          "content": "Content 2",
-          "status": "in-progress"
-        },
-        {
-          "id": 2,
-          "title": "Node 3",
-          "content": "Content 3",
-          "status": "completed"
-        }
-      ],
-      "mode": ""
-    },
-    {
       "id": 1593389309546,
-      "name": "kushtyy yy",
+      "name": "kush",
       "status": "completed",
       "deleted": false,
       "nodes": [
@@ -58,14 +31,14 @@
       "mode": ""
     },
     {
-      "id": 1593397964151,
-      "name": "kush 3 pooja",
+      "id": 1593631963928,
+      "name": "Workflow 201 101",
       "status": "pending",
       "deleted": false,
       "nodes": [
         {
-          "title": "ss",
-          "content": "ss",
+          "title": "harry potter",
+          "content": "",
           "id": 1,
           "status": "pending"
         }
@@ -73,14 +46,14 @@
       "mode": ""
     },
     {
-      "id": 1593443670980,
-      "name": "another 2",
+      "id": 1593632038575,
+      "name": "Workflow 3",
       "status": "pending",
       "deleted": false,
       "nodes": [
         {
-          "title": "test 452562",
-          "content": "jkdjkdkjd",
+          "title": "jksjks",
+          "content": "",
           "id": 1,
           "status": "pending"
         }
@@ -88,14 +61,29 @@
       "mode": ""
     },
     {
-      "id": 1593444202491,
-      "name": "673673",
+      "id": 1593632380775,
+      "name": "Workflow 101",
       "status": "pending",
       "deleted": false,
       "nodes": [
         {
-          "title": "skjsjks",
-          "content": "dkldkl",
+          "title": "ssj",
+          "content": "ww",
+          "id": 1,
+          "status": "pending"
+        }
+      ],
+      "mode": ""
+    },
+    {
+      "id": 1593635619977,
+      "name": "new",
+      "status": "pending",
+      "deleted": false,
+      "nodes": [
+        {
+          "title": "new",
+          "content": "new",
           "id": 1,
           "status": "pending"
         }

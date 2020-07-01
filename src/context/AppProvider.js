@@ -107,6 +107,7 @@ class AppProvider extends Component {
   };
 
   saveWorkflow = (data, mode) => {
+
     const headers = {
       'Content-Type': 'application/json'
       //'Authorization': 'JWT fefege...'
@@ -131,9 +132,13 @@ class AppProvider extends Component {
         })
         .then((response) => {
           console.log(response);
-          if (response.status === 201) {
+          if (response.status === 201 || response.status === 200) {
             workflows = [...this.state.workflows];
             workflows[position] = data;
+            this.setState({
+              workflows,
+              workflowsOriginal: workflows
+            }, () => this.props.history.goBack());
           }
         });
 
@@ -148,6 +153,11 @@ class AppProvider extends Component {
           console.log(response);
           if (response.status === 201) {
             workflows = [...this.state.workflows, response.data];
+            console.log(workflows);
+            this.setState({
+              workflows,
+              workflowsOriginal: workflows
+            }, () => this.props.history.goBack());
           }
         });
 
@@ -157,10 +167,7 @@ class AppProvider extends Component {
     console.log(data);
     console.log(this.props);
 
-    this.setState({
-      workflows,
-      workflowsOriginal: workflows
-    }, () => this.props.history.goBack());
+
   };
   updateWorkflowState = (data) => {
     const headers = {

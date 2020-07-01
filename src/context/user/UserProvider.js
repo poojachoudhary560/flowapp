@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import UserContext from './UserContext';
+import { withRouter } from 'react-router-dom';
 
 class UserProvider extends Component {
   constructor(props) {
@@ -11,21 +12,26 @@ class UserProvider extends Component {
       authenticated: false,
     };
   }
+  componentDidMount() {
+    console.log(this.props);
+  }
+  componentDidUpdate() {
+    console.log(this.props);
+    console.log(this.state);
+  }
   loginHandler = () => {
-    setTimeout(() => {
-      this.setState({
-        authenticated: true,
-        user: {
-          name: 'pooja'
-        }
-      });
-    }, 2000);
+    this.setState({
+      authenticated: true,
+      user: {
+        name: 'pooja'
+      }
+    }, () => this.props.history.push('/home'));
   };
   logoutHandler = () => {
     this.setState({
       authenticated: false,
       user: {}
-    });
+    }, () => this.props.history.push('/'));
   };
   render() {
     return (
@@ -43,4 +49,5 @@ class UserProvider extends Component {
   }
 }
 
-export default UserProvider;
+
+export default withRouter(UserProvider);
