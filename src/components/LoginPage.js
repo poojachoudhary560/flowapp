@@ -21,27 +21,65 @@ class LoginPage extends Component {
     this.state = {
       email: '',
       password: '',
-      remember: false
+      isChecked: false,
+      validated: false
     };
   }
   static contextType = UserContext;
 
+  componentDidMount() {
+    if (localStorage.checkbox && localStorage.email !== '') {
+      this.setState({
+        isChecked: true,
+        email: localStorage.username,
+        password: localStorage.password
+      });
+    }
+  }
   handleChange = (event) => {
-    console.log(event.target);
     const { name, value } = event.target;
     this.setState({
       [name]: value
     });
   };
 
-  login = (event) => {
-    event.preventDefault();
-    // alert('submitted');
-    // change props here
+  setValidated = () => {
+    this.setState({
+      validated: !this.state.validated
+    });
+  };
+  handleClick = (event) => {
+    this.setState({
+      isChecked: !this.state.isChecked
+    });
+  };
+
+  checkValid = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+
+    // this will set the validation feedbacks in forms
+    this.setState({
+      validated: true
+    });
+    if (form.checkValidity() === true) {
+      this.login();
+    }
+  };
+
+  login = () => {
+    const { email, password, isChecked } = this.state;
+
+    if (isChecked && email !== '') {
+      localStorage.username = email;
+      localStorage.password = password;
+      localStorage.checkbox = isChecked;
+    }
     if (this.state.email && this.state.password) {
-      console.log(this.context);
       this.context.login(this.state);
-      //this.props.history.push('/home')
     }
   };
   render() {
@@ -49,11 +87,15 @@ class LoginPage extends Component {
       <Container>
         <Row>
           <Col md={{ span: 6, offset: 3 }}>
-            <Card style={{marginTop: '4rem'}}>
+            <Card style={{ marginTop: '4rem' }}>
               <Card.Body>
                 <Card.Title>Login</Card.Title>
-                <Form>
-                  <InputGroup className='mb-3'  style={{marginTop: '2rem'}}>
+                <Form
+                  noValidate
+                  validated={this.state.validated}
+                  onSubmit={this.checkValid}
+                >
+                  <InputGroup className='mb-3' style={{ marginTop: '2rem' }}>
                     <InputGroup.Prepend>
                       <InputGroup.Text id='basic-addon1'>
                         <FaRegEnvelope />
@@ -61,13 +103,17 @@ class LoginPage extends Component {
                     </InputGroup.Prepend>
                     <Form.Control
                       type='email'
+                      required
                       placeholder='Enter email'
                       name='email'
                       value={this.state.email}
                       onChange={this.handleChange}
                     />
+                    <Form.Control.Feedback type='invalid'>
+                      Enter a valid registered email.
+                    </Form.Control.Feedback>
                   </InputGroup>
-                  <InputGroup className='mb-3'  style={{marginTop: '2rem'}} >
+                  <InputGroup className='mb-3' style={{ marginTop: '2rem' }}>
                     <InputGroup.Prepend>
                       <InputGroup.Text id='basic-addon1'>
                         <FaAsterisk />
@@ -75,29 +121,42 @@ class LoginPage extends Component {
                     </InputGroup.Prepend>
                     <Form.Control
                       type='password'
+                      required
                       placeholder='Password'
                       name='password'
                       value={this.state.password}
                       onChange={this.handleChange}
                     />
+                    <Form.Control.Feedback type='invalid'>
+                      This field is required
+                    </Form.Control.Feedback>
                   </InputGroup>
 
-                  <Form.Group controlId='formBasicCheckbox'  style={{marginTop: '2rem', textAlign: 'left'}}>
-                    <Form.Check type='checkbox' label='Remember me' />
+                  <Form.Group
+                    controlId='formBasicCheckbox'
+                    style={{ marginTop: '2rem', textAlign: 'left' }}
+                  >
+                    <Form.Check
+                      type='checkbox'
+                      label='Remember me'
+                      checked={this.state.isChecked}
+                      onChange={this.handleClick}
+                    />
                   </Form.Group>
                   <Button
-                  style={{marginTop: '2rem'}}
+                    style={{ marginTop: '2rem' }}
                     variant='primary'
                     type='submit'
-                    onClick={this.login}
                     block
                   >
                     Login
                   </Button>
                 </Form>
-
               </Card.Body>
-              <Card.Link href='#' style={{marginTop: '1rem', marginBottom: '2rem'}}>
+              <Card.Link
+                href='#'
+                style={{ marginTop: '1rem', marginBottom: '2rem' }}
+              >
                 Don't have an account? Sign up here
               </Card.Link>
             </Card>

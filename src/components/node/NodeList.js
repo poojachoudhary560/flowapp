@@ -9,9 +9,7 @@ class NodeList extends Component {
 
     this.state = {};
   }
-  componentDidMount() {
-    console.log(this.props);
-  }
+
   render() {
     const { nodes } = this.props;
 
@@ -25,7 +23,9 @@ class NodeList extends Component {
                   node={node}
                   key={node.id}
                   handleNodeChange={this.props.handleNodeChange}
-                  showArrow={(this.props.nodes.length-1)===index ? false : true}
+                  showArrow={
+                    this.props.nodes.length - 1 === index ? false : true
+                  }
                 />
               );
             })}

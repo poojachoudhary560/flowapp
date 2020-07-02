@@ -21,16 +21,14 @@ class WorkflowCard extends Component {
     this.setState(
       {
         focus: true
-      },
-      console.log('focus on')
+      }
     );
   };
   mouseOut = () => {
     this.setState(
       {
         focus: false
-      },
-      console.log('focus off')
+      }
     );
   };
   updateNodeState = () => {
@@ -45,12 +43,10 @@ class WorkflowCard extends Component {
     }
     if(flag < nodes.length) {
       // cannot mark complete
-      console.log("cannot mark complete");
       this.props.notify();
 
     } else {
       // mark status complete and save
-      console.log("mark status complete");
       const newData = {...this.props.workflow};
       newData.status = 'completed'
       this.props.updateWorkflowStatus(newData)

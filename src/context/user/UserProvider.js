@@ -9,29 +9,29 @@ class UserProvider extends Component {
       user: {
         name: 'Guest'
       },
-      authenticated: false,
+      authenticated: false
     };
   }
-  componentDidMount() {
-    console.log(this.props);
-  }
-  componentDidUpdate() {
-    console.log(this.props);
-    console.log(this.state);
-  }
+
   loginHandler = () => {
-    this.setState({
-      authenticated: true,
-      user: {
-        name: 'pooja'
-      }
-    }, () => this.props.history.push('/home'));
+    this.setState(
+      {
+        authenticated: true,
+        user: {
+          name: 'pooja'
+        }
+      },
+      () => this.props.history.push('/home')
+    );
   };
   logoutHandler = () => {
-    this.setState({
-      authenticated: false,
-      user: {}
-    }, () => this.props.history.push('/'));
+    this.setState(
+      {
+        authenticated: false,
+        user: {}
+      },
+      () => this.props.history.push('/')
+    );
   };
   render() {
     return (
@@ -48,6 +48,5 @@ class UserProvider extends Component {
     );
   }
 }
-
 
 export default withRouter(UserProvider);

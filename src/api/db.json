@@ -1,21 +1,6 @@
 {
   "workflows": [
     {
-      "id": 1593389309546,
-      "name": "kush",
-      "status": "completed",
-      "deleted": false,
-      "nodes": [
-        {
-          "title": "lion",
-          "content": "ysysys",
-          "id": 1,
-          "status": "completed"
-        }
-      ],
-      "mode": ""
-    },
-    {
       "id": 1593394257203,
       "name": "ping pong",
       "status": "pending",
@@ -24,36 +9,6 @@
         {
           "title": "ping pong",
           "content": "ping pong 456",
-          "id": 1,
-          "status": "pending"
-        }
-      ],
-      "mode": ""
-    },
-    {
-      "id": 1593631963928,
-      "name": "Workflow 201 101",
-      "status": "pending",
-      "deleted": false,
-      "nodes": [
-        {
-          "title": "harry potter",
-          "content": "",
-          "id": 1,
-          "status": "pending"
-        }
-      ],
-      "mode": ""
-    },
-    {
-      "id": 1593632038575,
-      "name": "Workflow 3",
-      "status": "pending",
-      "deleted": false,
-      "nodes": [
-        {
-          "title": "jksjks",
-          "content": "",
           "id": 1,
           "status": "pending"
         }
@@ -76,18 +31,11 @@
       "mode": ""
     },
     {
-      "id": 1593635619977,
-      "name": "new",
-      "status": "pending",
+      "id": 1593649716284,
+      "name": "qazwsxedcc",
+      "status": "completed",
       "deleted": false,
-      "nodes": [
-        {
-          "title": "new",
-          "content": "new",
-          "id": 1,
-          "status": "pending"
-        }
-      ],
+      "nodes": [],
       "mode": ""
     }
   ]

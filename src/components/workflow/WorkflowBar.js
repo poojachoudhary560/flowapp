@@ -34,7 +34,6 @@ class WorkflowBar extends Component {
   };
 
   handleClick = (eventKey) => {
-    console.log(eventKey);
     this.setState({
       filter: eventKey
     });

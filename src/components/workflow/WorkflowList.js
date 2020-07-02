@@ -20,14 +20,10 @@ class WorkflowList extends Component {
   }
   static contextType = AppContext;
   componentDidMount() {
-    //this.props.context.getWorkflows();
-    console.log(this.props);
-    console.log(this.context);
     this.context.getWorkflows();
-    //console.log(workflowData);
   }
   notify = () =>
-    toast('🦄 Wow so easy!', {
+    toast('All nodes are not marked Complete', {
       position: 'bottom-center',
       type: 'dark',
       autoClose: 5000,
@@ -39,7 +35,6 @@ class WorkflowList extends Component {
     });
 
   deleteWorkflow = (e) => {
-    console.log(e.target.value + '   ' + e.target.name);
     this.context.deleteWorkflow(e.target.value);
   };
 

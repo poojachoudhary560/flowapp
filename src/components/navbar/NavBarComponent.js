@@ -9,16 +9,9 @@ class NavBarComponent extends Component {
 
     this.state = {};
   }
-  componentDidMount() {
-    console.log(this.props);
-    console.log(this.context);
-  }
-  componentDidUpdate() {
-    console.log(this.context);
-  }
+
   handleChange = () => {
     this.context.logout();
-    console.log(this.props);
   };
   static contextType = UserContext;
   render() {

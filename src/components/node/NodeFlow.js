@@ -32,45 +32,21 @@ class NodeFlow extends Component {
   }
   static contextType = AppContext;
   async componentDidMount() {
-    // get id for next workflow and set
-    // let id = this.context.state.workflows.length;
-    // console.log(id)
-    console.log(this.state.id);
-
-    console.log(this.props);
-
-    //this.props.match.params.id
     let data = {};
 
     if (this.props.match.params.id) {
-      //
-      /*
-      data = await this.context.getWorkflow(parseInt(this.props.match.params.id));
-      console.log(data);
-      if (data === undefined) {
-        await this.context.getWorkflows();
-        data = await this.context.getWorkflow(parseInt(this.props.match.params.id));
-      } */
-      axios.get(`http://localhost:3001/workflows/${this.props.match.params.id}`).then(res => {
-      console.log(res.data);
-      const { id, name, deleted, nodes, status } = res.data;
-      this.setState({
-        id: id,
-        name: name,
-        deleted: deleted,
-        nodes: nodes,
-        status: status
-      });
-    })
-    /*
-      const { id, name, deleted, nodes, status } = this.context.state.;
-      this.setState({
-        id: id,
-        name: name,
-        deleted: deleted,
-        nodes: nodes,
-        status: status
-      }); */
+      axios
+        .get(`http://localhost:3001/workflows/${this.props.match.params.id}`)
+        .then((res) => {
+          const { id, name, deleted, nodes, status } = res.data;
+          this.setState({
+            id: id,
+            name: name,
+            deleted: deleted,
+            nodes: nodes,
+            status: status
+          });
+        });
     }
   }
 
@@ -102,7 +78,6 @@ class NodeFlow extends Component {
     });
   };
   handleNodeChange = (event, id) => {
-    console.log(event.target.value + '..... ' + id);
     let { name, value } = event.target;
     if (name === 'status') {
       let changeStateOrder = {
@@ -112,16 +87,12 @@ class NodeFlow extends Component {
       };
       value = changeStateOrder[value];
     }
-    console.log(event.target.value + '..... ' + id);
     let newArr = this.state.nodes.filter((item) => item.id === id);
     let [item] = newArr;
     let updatedNode = {
       ...item,
       [name]: value
     };
-    console.log(newArr);
-    console.log(updatedNode);
-    console.log(this.state.nodes);
     const indexOldElement = this.state.nodes.findIndex(
       (node) => node.id === id
     );
@@ -131,9 +102,8 @@ class NodeFlow extends Component {
     this.setState({
       nodes: newArray
     });
-    console.log(newArray);
   };
-   handleClick = async (event) => {
+  handleClick = async (event) => {
     let { name, value } = event.target;
     if (name === 'add') {
       let node = {
@@ -158,22 +128,15 @@ class NodeFlow extends Component {
       } else if (currentPath.includes('/add')) {
         await this.context.saveWorkflow({ ...this.state }, 'add');
       }
-
     } else if (name === 'shuffle') {
-      console.log(this.state.nodes);
-      //this.props.history.goBack();
       let copy = [...this.state.nodes];
       let shuffledArr = this.shuffle(copy);
-      console.log(shuffledArr);
       this.setState({
         nodes: shuffledArr
       });
     } else if (name === 'delete') {
-      console.log(this.state.nodes);
-      //this.props.history.goBack();
       let newNodes = [...this.state.nodes];
       let removeLast = newNodes.splice(-1, 1);
-      console.log(newNodes);
       this.setState({
         nodes: newNodes
       });
