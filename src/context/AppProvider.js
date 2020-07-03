@@ -76,7 +76,8 @@ class AppProvider extends Component {
     this.setState({});
   };
 
-  saveWorkflow = (data, mode) => {
+  saveWorkflow = (nodeData, mode) => {
+    let data = {...nodeData, nodesTitleInvalid: false}
     const headers = {
       'Content-Type': 'application/json'
       //'Authorization': 'JWT fefege...'

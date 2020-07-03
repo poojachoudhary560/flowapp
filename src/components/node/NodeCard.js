@@ -44,7 +44,7 @@ class NodeCard extends Component {
   render() {
     // const { name, id, status, deleted } = this.props.workflow;
     const { node, handleChange } = this.props;
-    const { id, title, content, status, isTitleInvalid } = node;
+    const { id, title, content, status } = node;
     return (
       <>
         <Col xs={12} md={4} className='node-cards-layout'>
@@ -61,9 +61,7 @@ class NodeCard extends Component {
                         name='title'
                         onChange={this.handleChange}
                       />
-                      {isTitleInvalid && (
-                        <p style={{ color: 'red' }}>*Required</p>
-                      )}
+
                     </Form.Group>
                     <Form.Group controlId='exampleForm.ControlTextarea1'>
                       <Form.Control

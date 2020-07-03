@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import NodeBar from './NodeBar';
 
 import Row from 'react-bootstrap/Row';
+
 import axios from 'axios';
 import Container from 'react-bootstrap/Container';
 
@@ -18,6 +19,7 @@ class NodeFlow extends Component {
       id: Date.now(),
       name: '', //name
       isWorkflowNameInvalid: false,
+      nodesTitleInvalid: false,
       status: 'pending',
       deleted: false,
       nodes: [
@@ -162,42 +164,31 @@ class NodeFlow extends Component {
       if(!nodesArr[i].title) {
         invalidFlag += 1;
 
-        let item = {...nodesArr[i]}
-        item.isTitleInvalid = true;
-        nodesArr[i] = item;
-      } else {
-        let item = {...nodesArr[i]}
-        item.isTitleInvalid = false;
-        nodesArr[i] = item;
       }
     }
-   /* const newArray = Object.assign([...this.state.nodes], {
-      [indexOldElement]: updatedNode
-    }); */
-    this.setState({
-      nodes: [...nodesArr]
-    })
-    console.log(nodesArr);
-    if(invalidFlag > 0) {
 
+
+    if(invalidFlag > 0) {
+      this.setState({
+        nodesTitleInvalid: true
+      })
       return false;
     }
     return true;
 
   }
   allValidations = () => {
-     // let nodeValidations = this.nodeValidation();
+    let nodeValidations = this.nodeValidation();
     let workflowValidations = this.workflowValidation();
 
     console.log(workflowValidations);
-    return workflowValidations;
+    return workflowValidations && nodeValidations;
   }
   handleClick = async (event) => {
     let { name, value } = event.target;
     if (name === 'add') {
       let node = {
         title: '',
-        isTitleInvalid: false,
         content: '',
         status: 'pending',
         id: this.state.nodes.length > 0 ? this.state.nodes.length + 1 : 1
@@ -252,6 +243,7 @@ class NodeFlow extends Component {
           <hr className='line-details' />
           <Row>
             <NodeList
+              nodesTitleInvalid = {this.state.nodesTitleInvalid}
               nodes={this.state.nodes}
               handleNodeChange={this.handleNodeChange}
             />

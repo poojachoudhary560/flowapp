@@ -4,34 +4,7 @@
       "id": 1,
       "name": "Workflow 1",
       "isWorkflowNameInvalid": false,
-      "status": "pending",
-      "deleted": false,
-      "nodes": [
-        {
-          "id": 0,
-          "title": "Node 1",
-          "content": "Content 1",
-          "status": "in-progress"
-        },
-        {
-          "id": 1,
-          "title": "Node 2",
-          "content": "Content 2",
-          "status": "pending"
-        },
-        {
-          "id": 2,
-          "title": "Node 3",
-          "content": "Content 3",
-          "status": "pending"
-        }
-      ],
-      "mode": ""
-    },
-    {
-      "id": 2,
-      "name": "Workflow 2",
-      "isWorkflowNameInvalid": false,
+      "nodesTitleInvalid": false,
       "status": "pending",
       "deleted": false,
       "nodes": [
@@ -52,6 +25,41 @@
           "title": "Node 3",
           "content": "Content 3",
           "status": "pending"
+        }
+      ],
+      "mode": ""
+    },
+    {
+      "id": 2,
+      "name": "Workflow 2",
+      "isWorkflowNameInvalid": false,
+      "nodesTitleInvalid": false,
+      "status": "pending",
+      "deleted": false,
+      "nodes": [
+        {
+          "id": 0,
+          "title": "Node 1",
+          "content": "Content 1",
+          "status": "completed"
+        },
+        {
+          "id": 1,
+          "title": "Node 2",
+          "content": "Content 2",
+          "status": "pending"
+        },
+        {
+          "id": 2,
+          "title": "Node 3",
+          "content": "Content 3",
+          "status": "pending"
+        },
+        {
+          "title": "Node 4",
+          "content": "",
+          "status": "pending",
+          "id": 4
         }
       ],
       "mode": ""
@@ -78,25 +86,18 @@
           "id": 2,
           "title": "Node 3",
           "content": "Content 3",
-          "status": "completed"
+          "status": "pending"
         }
       ]
     },
     {
-      "id": 1593757246912,
-      "name": "Sample",
-      "isWorkflowNameInvalid": false,
+      "id": 1593767972178,
+      "name": "four",
+      "isWorkflowNameInvalid": true,
+      "nodesTitleInvalid": false,
       "status": "pending",
       "deleted": false,
-      "nodes": [
-        {
-          "title": "Head",
-          "isTitleInvalid": false,
-          "content": "Data",
-          "status": "pending",
-          "id": 1
-        }
-      ],
+      "nodes": [],
       "mode": ""
     }
   ]
