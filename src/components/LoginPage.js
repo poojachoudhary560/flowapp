@@ -28,6 +28,10 @@ class LoginPage extends Component {
   static contextType = UserContext;
 
   componentDidMount() {
+    console.log(this.context.authenticated);
+   if(this.context.authenticated) {
+      this.props.history.push('/home')
+    }
     if (localStorage.checkbox && localStorage.email !== '') {
       this.setState({
         isChecked: true,

@@ -3,32 +3,35 @@
     {
       "id": 1,
       "name": "Workflow 1",
-      "status": "completed",
+      "isWorkflowNameInvalid": false,
+      "status": "pending",
       "deleted": false,
       "nodes": [
         {
           "id": 0,
           "title": "Node 1",
           "content": "Content 1",
-          "status": "pending"
+          "status": "in-progress"
         },
         {
           "id": 1,
           "title": "Node 2",
           "content": "Content 2",
-          "status": "in-progress"
+          "status": "pending"
         },
         {
           "id": 2,
           "title": "Node 3",
           "content": "Content 3",
-          "status": "completed"
+          "status": "pending"
         }
-      ]
+      ],
+      "mode": ""
     },
     {
       "id": 2,
       "name": "Workflow 2",
+      "isWorkflowNameInvalid": false,
       "status": "pending",
       "deleted": false,
       "nodes": [
@@ -42,15 +45,16 @@
           "id": 1,
           "title": "Node 2",
           "content": "Content 2",
-          "status": "completed"
+          "status": "pending"
         },
         {
           "id": 2,
           "title": "Node 3",
           "content": "Content 3",
-          "status": "completed"
+          "status": "pending"
         }
-      ]
+      ],
+      "mode": ""
     },
     {
       "id": 3,
@@ -77,6 +81,23 @@
           "status": "completed"
         }
       ]
+    },
+    {
+      "id": 1593757246912,
+      "name": "Sample",
+      "isWorkflowNameInvalid": false,
+      "status": "pending",
+      "deleted": false,
+      "nodes": [
+        {
+          "title": "Head",
+          "isTitleInvalid": false,
+          "content": "Data",
+          "status": "pending",
+          "id": 1
+        }
+      ],
+      "mode": ""
     }
   ]
 }

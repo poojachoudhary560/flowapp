@@ -29,7 +29,7 @@ class NavBarComponent extends Component {
               </Link>
             )}
           </Navbar.Brand>
-          {this.context.authenticated && (
+          {(this.context.authenticated) && (
             <Link to='/' className='home-link' style={{ marginLeft: 'auto' }}>
               <Button variant='light' onClick={this.handleChange}>
                 Logout

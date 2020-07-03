@@ -9,27 +9,16 @@ class NodeBar extends Component {
   constructor(props) {
     super(props);
     this.handleChange = this.handleChange.bind(this);
-    this.state = {
-      isInValid: false
-    };
+
   }
 
   //static contextType = AppContext;
   handleChange(event) {
     this.props.handleNameChange(event);
   }
-  checkValid = (event) => {
-    if (this.props.workspaceName) {
-      this.props.handleClick(event);
-    } else {
-      this.setState({
-        isInValid: true
-      });
-    }
 
-  };
   render() {
-    const { workspaceName } = this.props;
+    const { workspaceName, workspaceStatus } = this.props;
     return (
       <>
         <Row className='node-bar'>
@@ -41,22 +30,18 @@ class NodeBar extends Component {
                     name='workflowName'
                     type='text'
                     placeholder={
-                      this.state.isInValid
+                      this.props.isWorkflowNameInvalid
                         ? 'Workflow Title is required'
                         : 'Workflow Title'
                     }
                     onChange={this.handleChange}
                     value={workspaceName}
                   />
-                  {this.state.isInValid && (
-                    <Form.Control.Feedback>
-                      Enter a valid registered email.
-                    </Form.Control.Feedback>
-                  )}
+
                 </Form.Group>
               </Col>
               <Col md={3}>
-                {this.state.isInValid && (
+                {this.props.isWorkflowNameInvalid && (
                   <p style={{ color: 'red', textAlign: 'left' }}>*Required</p>
                 )}
               </Col>
@@ -66,7 +51,8 @@ class NodeBar extends Component {
             <Row>
               <Col></Col>
               <Col>
-                <Button
+                {
+                  workspaceStatus === 'completed' && <Button
                   variant='purple'
                   block
                   onClick={this.props.handleClick}
@@ -74,7 +60,8 @@ class NodeBar extends Component {
                 >
                   {' '}
                   <FaRandom /> Shuffle
-                </Button>{' '}
+                </Button>
+                }{' '}
               </Col>
               <Col>
                 <Button
@@ -103,7 +90,7 @@ class NodeBar extends Component {
                   block
                   variant='primary'
                   name='save'
-                  onClick={this.checkValid}
+                  onClick={this.props.handleClick}
                 >
                   Save
                 </Button>{' '}

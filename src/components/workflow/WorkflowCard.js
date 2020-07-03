@@ -7,7 +7,6 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import { Link } from 'react-router-dom';
 
-
 class WorkflowCard extends Component {
   constructor(props) {
     super(props);
@@ -18,38 +17,38 @@ class WorkflowCard extends Component {
     };
   }
   mouseOver = () => {
-    this.setState(
-      {
-        focus: true
-      }
-    );
+    this.setState({
+      focus: true
+    });
   };
   mouseOut = () => {
-    this.setState(
-      {
-        focus: false
-      }
-    );
+    this.setState({
+      focus: false
+    });
   };
   updateNodeState = () => {
     const { name, id, status, deleted, nodes } = this.props.workflow;
-    let flag = 0;
-    for(let i=0; i<nodes.length; i++) {
-
-      if(nodes[i].status !== 'completed') {
-        break;
+    if (status === 'pending') {
+      let flag = 0;
+      for (let i = 0; i < nodes.length; i++) {
+        if (nodes[i].status !== 'completed') {
+          break;
+        }
+        flag += 1;
       }
-      flag += 1;
-    }
-    if(flag < nodes.length) {
-      // cannot mark complete
-      this.props.notify();
-
-    } else {
-      // mark status complete and save
-      const newData = {...this.props.workflow};
-      newData.status = 'completed'
-      this.props.updateWorkflowStatus(newData)
+      if (flag < nodes.length) {
+        // cannot mark complete
+        this.props.notify();
+      } else {
+        // mark status complete and save
+        const newData = { ...this.props.workflow };
+        newData.status = 'completed';
+        this.props.updateWorkflowStatus(newData);
+      }
+    } else if (status === 'completed') {
+      const newData = { ...this.props.workflow };
+      newData.status = 'pending';
+      this.props.updateWorkflowStatus(newData);
     }
   };
   editWorkflow() {}
@@ -61,16 +60,23 @@ class WorkflowCard extends Component {
     const { name, id, status, deleted } = this.props.workflow;
     return (
       <>
-        <Col xs={6} md={4} className="node-cards-layout">
+        <Col xs={6} md={4} className='node-cards-layout'>
           <Card
-            style={{ width: '18rem', boxShadow: this.state.focus ? "1px 0px 1px #9E9E9E" : '' }}
+            style={{
+              width: '18rem',
+              boxShadow: this.state.focus ? '1px 0px 1px #9E9E9E' : ''
+            }}
             onMouseEnter={this.mouseOver}
             onMouseLeave={this.mouseOut}
           >
             <Card.Body>
               <Card.Text>
                 <Link to={`/edit/${id}`}>
-                  <Button block variant="outline-dark" onClick={this.editWorkflow}>
+                  <Button
+                    block
+                    variant='outline-dark'
+                    onClick={this.editWorkflow}
+                  >
                     {name}
                   </Button>
                 </Link>
@@ -86,7 +92,6 @@ class WorkflowCard extends Component {
                     className={`btn-circle btn-sm `}
                     onClick={this.updateNodeState}
                   >
-
                     <FaCheck />
                   </Button>
                 </Col>
@@ -105,7 +110,6 @@ class WorkflowCard extends Component {
             )}
           </Card>
         </Col>
-
       </>
     );
   }
