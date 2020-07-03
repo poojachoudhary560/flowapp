@@ -175,7 +175,7 @@ class AppProvider extends Component {
       afterSearch = [...afterFilter];
     } else {
       afterSearch = afterFilter.filter((item) => {
-        return item.name.includes(this.state.searchKey);
+        return item.name.toLowerCase().includes(this.state.searchKey);
       });
     }
 
