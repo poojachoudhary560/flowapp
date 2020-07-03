@@ -54,12 +54,6 @@
           "title": "Node 3",
           "content": "Content 3",
           "status": "pending"
-        },
-        {
-          "title": "Node 4",
-          "content": "",
-          "status": "pending",
-          "id": 4
         }
       ],
       "mode": ""

@@ -84,7 +84,7 @@ class WorkflowCard extends Component {
 
               <Row>
                 <Col>
-                  <Card.Text>{status}</Card.Text>
+                  <Card.Text>{status.toUpperCase()}</Card.Text>
                 </Col>
                 <Col>
                   <Button
