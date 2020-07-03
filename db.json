@@ -31,7 +31,7 @@
     },
     {
       "id": 2,
-      "name": "yyyyyyyyyyyyyyyyyyyy",
+      "name": "Workflow 2",
       "isWorkflowNameInvalid": false,
       "nodesTitleInvalid": false,
       "status": "pending",
@@ -89,36 +89,6 @@
           "status": "pending"
         }
       ]
-    },
-    {
-      "id": 1593767972178,
-      "name": "four",
-      "isWorkflowNameInvalid": true,
-      "nodesTitleInvalid": false,
-      "status": "pending",
-      "deleted": false,
-      "nodes": [],
-      "mode": ""
-    },
-    {
-      "id": 1593768288225,
-      "name": "oPPo",
-      "isWorkflowNameInvalid": false,
-      "nodesTitleInvalid": false,
-      "status": "completed",
-      "deleted": false,
-      "nodes": [],
-      "mode": ""
-    },
-    {
-      "id": 1593768343541,
-      "name": "zzzzzzzzz",
-      "isWorkflowNameInvalid": false,
-      "nodesTitleInvalid": false,
-      "status": "completed",
-      "deleted": false,
-      "nodes": [],
-      "mode": ""
     }
   ]
 }

@@ -56,7 +56,7 @@ class NodeCard extends Component {
                     <Form.Group controlId='exampleForm.ControlInput2'>
                       <Form.Control
                         type='text'
-                        placeholder='name@example.com'
+                        placeholder='Title'
                         value={title}
                         name='title'
                         onChange={this.handleChange}
@@ -68,6 +68,7 @@ class NodeCard extends Component {
                         as='textarea'
                         rows='12'
                         name='content'
+                        placeholder='Content'
                         value={content}
                         onChange={this.handleChange}
                       />
