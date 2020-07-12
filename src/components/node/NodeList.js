@@ -11,7 +11,6 @@ class NodeList extends Component {
   }
 
   render() {
-    const { nodes } = this.props;
 
     return (
       <>

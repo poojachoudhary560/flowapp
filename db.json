@@ -18,13 +18,13 @@
           "id": 1,
           "title": "Node 2",
           "content": "Content 2",
-          "status": "pending"
+          "status": "completed"
         },
         {
           "id": 2,
           "title": "Node 3",
           "content": "Content 3",
-          "status": "pending"
+          "status": "completed"
         }
       ],
       "mode": ""
@@ -83,6 +83,29 @@
           "status": "pending"
         }
       ]
+    },
+    {
+      "id": 1594540124830,
+      "name": "Test",
+      "isWorkflowNameInvalid": false,
+      "nodesTitleInvalid": false,
+      "status": "pending",
+      "deleted": false,
+      "nodes": [
+        {
+          "title": "1",
+          "content": "1",
+          "status": "in-progress",
+          "id": 1
+        },
+        {
+          "title": "22",
+          "content": "22",
+          "status": "pending",
+          "id": 2
+        }
+      ],
+      "mode": ""
     }
   ]
 }

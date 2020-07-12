@@ -5,14 +5,19 @@ import UserContext from '../context/user/UserContext'
 
 const ProtectedRoute = ({ component: Component, ...rest }) => (
   <UserContext.Consumer>
-    {({ authenticated }) => (
-      <Route
-        render={props =>
-          (authenticated) ? <Component {...props} /> : <Redirect to="/" />
-        }
-        {...rest}
-      />
-    )}
+    {(props) => {
+      let { authenticated } = props;
+      console.log("------------------------")
+      console.log(authenticated)
+      return (
+        <Route
+          render={props =>
+            (authenticated) ? <Component {...props} /> : <Redirect to="/" />
+          }
+          {...rest}
+        />
+      )
+    }}
   </UserContext.Consumer>
 )
 

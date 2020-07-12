@@ -2,13 +2,12 @@ import React, { Component } from 'react';
 import './App.css';
 import NavBarComponent from './components/navbar/NavBarComponent';
 import LoginPage from './components/LoginPage';
-import WorkflowBar from './components/workflow/WorkflowBar';
-import NodeBar from './components/node/NodeBar';
-import WorkflowCard from './components/workflow/WorkflowCard';
+
+
 import WorkflowList from './components/workflow/WorkflowList';
 import NodeFlow from './components/node/NodeFlow';
 import AppProvider from './context/AppProvider';
-import { Router, Route, Switch, Redirect } from 'react-router-dom';
+import { HashRouter, Route, Switch } from 'react-router-dom';
 //import createHistory from 'history/createBrowserHistory'
 import history from './router/history';
 import UserProvider from './context/user/UserProvider';
@@ -34,7 +33,7 @@ class App extends Component {
   render() {
     return (
       <div className='App'>
-        <Router history={history}>
+        <HashRouter history={history}>
           <UserProvider>
             <AppProvider>
               <NavBarComponent />
@@ -47,7 +46,7 @@ class App extends Component {
               </Switch>
             </AppProvider>
           </UserProvider>
-        </Router>
+        </HashRouter>
       </div>
     );
   }

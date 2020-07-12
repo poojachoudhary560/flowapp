@@ -3,6 +3,8 @@ import AppContext from './AppContext';
 import { withRouter } from 'react-router-dom';
 import workflowData from '../api/workflow';
 import axios from 'axios';
+
+import { config } from '../Constants';
 class AppProvider extends Component {
   constructor(props) {
     super(props);
@@ -29,7 +31,8 @@ class AppProvider extends Component {
   }
 
   getWorkflows = () => {
-    axios.get('http://localhost:3001/workflows').then((res) => {
+    let url = config.url.API_URL;
+    axios.get(`${url}/workflows`).then((res) => {
       if (this.state.searchKey === '' && this.state.filter === 'all') {
         this.setState({
           workflows: res.data,
@@ -48,7 +51,9 @@ class AppProvider extends Component {
   };
   getWorkflow(id) {
     let val;
-    axios.get(`http://localhost:3001/workflows/${id}`).then((res) => {
+    let url = config.url.API_URL;
+
+    axios.get(`${url}/workflows/${id}`).then((res) => {
       this.setState({
         workflow: res.data
       });
@@ -93,9 +98,10 @@ class AppProvider extends Component {
         }
         return data.id === element.id;
       });
+      let url = config.url.API_URL;
 
       axios
-        .put(`http://localhost:3001/workflows/${data.id}`, data, {
+        .put(`${url}/workflows/${data.id}`, data, {
           headers: headers
         })
         .then((response) => {
@@ -112,8 +118,10 @@ class AppProvider extends Component {
           }
         });
     } else if (mode === 'add') {
+      let url = config.url.API_URL;
+
       axios
-        .post('http://localhost:3001/workflows', data, {
+        .post(`${url}/workflows`, data, {
           headers: headers
         })
         .then((response) => {
@@ -136,8 +144,9 @@ class AppProvider extends Component {
       'Content-Type': 'application/json'
       //'Authorization': 'JWT fefege...'
     };
+    let url = config.url.API_URL;
     axios
-      .put(`http://localhost:3001/workflows/${data.id}`, data, {
+      .put(`${url}/workflows/${data.id}`, data, {
         headers: headers
       })
       .then((response) => {
@@ -194,7 +203,8 @@ class AppProvider extends Component {
     }
   }
   deleteWorkflow = (id) => {
-    axios.delete(`http://localhost:3001/workflows/${id}`).then((res) => {
+    let url = config.url.API_URL;
+    axios.delete(`${url}/workflows/${id}`).then((res) => {
       if (res.status === 200) {
         this.getWorkflows();
       }

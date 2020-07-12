@@ -10,7 +10,7 @@ import workflowData from '../../api/workflow';
 import NodeCard from './NodeCard';
 import NodeList from './NodeList';
 import AppContext from '../../context/AppContext';
-
+import { config } from '../../Constants';
 class NodeFlow extends Component {
   constructor(props) {
     super(props);
@@ -36,10 +36,13 @@ class NodeFlow extends Component {
   static contextType = AppContext;
   async componentDidMount() {
     let data = {};
+    var url = config.url.API_URL;
+    //http://localhost:3001
+
 
     if (this.props.match.params.id) {
       axios
-        .get(`http://localhost:3001/workflows/${this.props.match.params.id}`)
+        .get(`${url}/workflows/${this.props.match.params.id}`)
         .then((res) => {
           const { id, name, deleted, nodes, status } = res.data;
           this.setState({
