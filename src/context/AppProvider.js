@@ -1,47 +1,46 @@
-import React, { Component } from 'react';
-import AppContext from './AppContext';
-import { withRouter } from 'react-router-dom';
-import workflowData from '../api/workflow';
-import axios from 'axios';
+import React, { Component } from "react";
+import AppContext from "./AppContext";
+import { withRouter } from "react-router-dom";
+import axios from "axios";
 
-import { config } from '../Constants';
+import { config } from "../Constants";
 class AppProvider extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      initial: 'abc',
+      initial: "abc",
       workflows: [],
       workflowsOriginal: [],
-      hello: '',
+      hello: "",
       workflow: {
-        name: 'tes',
+        name: "tes",
         id: 1,
         nodes: [
           {
-            name: '',
-            description: '',
-            id: 1
-          }
-        ]
+            name: "",
+            description: "",
+            id: 1,
+          },
+        ],
       },
-      searchKey: '',
-      filter: 'all'
+      searchKey: "",
+      filter: "all",
     };
   }
 
   getWorkflows = () => {
     let url = config.url.API_URL;
     axios.get(`${url}/workflows`).then((res) => {
-      if (this.state.searchKey === '' && this.state.filter === 'all') {
+      if (this.state.searchKey === "" && this.state.filter === "all") {
         this.setState({
           workflows: res.data,
-          workflowsOriginal: res.data
+          workflowsOriginal: res.data,
         });
       } else {
         this.setState(
           {
-            workflowsOriginal: res.data
+            workflowsOriginal: res.data,
           },
 
           () => this.searchFilterWorkflow()
@@ -50,12 +49,11 @@ class AppProvider extends Component {
     });
   };
   getWorkflow(id) {
-    let val;
     let url = config.url.API_URL;
 
     axios.get(`${url}/workflows/${id}`).then((res) => {
       this.setState({
-        workflow: res.data
+        workflow: res.data,
       });
     });
 
@@ -64,45 +62,44 @@ class AppProvider extends Component {
   setWorkflow(name, value) {
     this.setState({
       ...this.state,
-      workflow: {}
+      workflow: {},
     });
   }
   setWorkflowName = (e) => {
     let newWorkflow = { ...this.state.workflow };
     newWorkflow.name = e.target.value;
     this.setState({
-      workflow: newWorkflow
+      workflow: newWorkflow,
     });
   };
   setNodeDetails = (e) => {
     // let id = this.state.node.length > 0 ? this.state.node.length : 1;
-    let newWorkflow = { ...this.state.workflow };
 
     this.setState({});
   };
 
   saveWorkflow = (nodeData, mode) => {
-    let data = {...nodeData, nodesTitleInvalid: false}
+    let data = { ...nodeData, nodesTitleInvalid: false };
     const headers = {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
       //'Authorization': 'JWT fefege...'
     };
     let workflows = [];
     // save after edit and add
-    if (mode === 'edit') {
+    if (mode === "edit") {
       let position;
-      let newArray = this.state.workflows.filter((element, index) => {
-        //filter 'em elements
-        if (data.id === element.id) {
-          position = index;
-        }
-        return data.id === element.id;
-      });
+      // let newArray = this.state.workflows.filter((element, index) => {
+      //   //filter 'em elements
+      //   if (data.id === element.id) {
+      //     position = index;
+      //   }
+      //   return data.id === element.id;
+      // });
       let url = config.url.API_URL;
 
       axios
         .put(`${url}/workflows/${data.id}`, data, {
-          headers: headers
+          headers: headers,
         })
         .then((response) => {
           if (response.status === 201 || response.status === 200) {
@@ -111,18 +108,18 @@ class AppProvider extends Component {
             this.setState(
               {
                 workflows,
-                workflowsOriginal: workflows
+                workflowsOriginal: workflows,
               },
               () => this.props.history.goBack()
             );
           }
         });
-    } else if (mode === 'add') {
+    } else if (mode === "add") {
       let url = config.url.API_URL;
 
       axios
         .post(`${url}/workflows`, data, {
-          headers: headers
+          headers: headers,
         })
         .then((response) => {
           if (response.status === 201) {
@@ -131,7 +128,7 @@ class AppProvider extends Component {
             this.setState(
               {
                 workflows,
-                workflowsOriginal: workflows
+                workflowsOriginal: workflows,
               },
               () => this.props.history.goBack()
             );
@@ -141,13 +138,13 @@ class AppProvider extends Component {
   };
   updateWorkflowState = (data) => {
     const headers = {
-      'Content-Type': 'application/json'
+      "Content-Type": "application/json",
       //'Authorization': 'JWT fefege...'
     };
     let url = config.url.API_URL;
     axios
       .put(`${url}/workflows/${data.id}`, data, {
-        headers: headers
+        headers: headers,
       })
       .then((response) => {
         if (response.status === 200 || response.status === 201) {
@@ -158,21 +155,21 @@ class AppProvider extends Component {
   searchWorkflows = (val) => {
     this.setState({
       // workflows: newWorkflows,
-      searchKey: val
+      searchKey: val,
     });
   };
 
   filterWorkflows = (filter) => {
     this.setState({
       //workflows: newWorkflows,
-      filter
+      filter,
     });
   };
 
   searchFilterWorkflow = () => {
     let afterFilter;
     let afterSearch;
-    if (this.state.filter === 'all') {
+    if (this.state.filter === "all") {
       afterFilter = [...this.state.workflowsOriginal];
     } else {
       afterFilter = this.state.workflowsOriginal.filter((item) => {
@@ -180,7 +177,7 @@ class AppProvider extends Component {
       });
     }
 
-    if (this.state.searchKey === '') {
+    if (this.state.searchKey === "") {
       afterSearch = [...afterFilter];
     } else {
       afterSearch = afterFilter.filter((item) => {
@@ -189,7 +186,7 @@ class AppProvider extends Component {
     }
 
     this.setState({
-      workflows: afterSearch
+      workflows: afterSearch,
     });
   };
 
@@ -223,7 +220,7 @@ class AppProvider extends Component {
           deleteWorkflow: this.deleteWorkflow,
           searchWorkflows: this.searchWorkflows,
           filterWorkflows: this.filterWorkflows,
-          updateWorkflowState: this.updateWorkflowState
+          updateWorkflowState: this.updateWorkflowState,
         }}
       >
         {this.props.children}

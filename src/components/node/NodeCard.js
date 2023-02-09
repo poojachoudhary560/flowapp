@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import Card from 'react-bootstrap/Card';
-import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
-import { FaCheck } from 'react-icons/fa';
-import Col from 'react-bootstrap/Col';
-import arrow_right from '../../images/arrow_right.png';
-import Form from 'react-bootstrap/Form';
+import React, { Component } from "react";
+import Card from "react-bootstrap/Card";
+import Button from "react-bootstrap/Button";
+import Row from "react-bootstrap/Row";
+import { FaCheck } from "react-icons/fa";
+import Col from "react-bootstrap/Col";
+import arrow_right from "../../images/arrow_right.png";
+import Form from "react-bootstrap/Form";
 
 class NodeCard extends Component {
   constructor(props) {
@@ -21,14 +21,14 @@ class NodeCard extends Component {
   }
 
   handleChange = (event) => {
-    const { id, title, content } = this.props.node;
+    const { id } = this.props.node;
     this.props.handleNodeChange(event, id);
   };
   showStatus = (status) => {
     let stateClassMap = {
-      completed: 'Completed',
-      'in-progress': 'Inprogress',
-      pending: 'Pending'
+      completed: "Completed",
+      "in-progress": "Inprogress",
+      pending: "Pending",
     };
     return stateClassMap[status];
   };
@@ -43,32 +43,31 @@ class NodeCard extends Component {
   };
   render() {
     // const { name, id, status, deleted } = this.props.workflow;
-    const { node, handleChange } = this.props;
-    const { id, title, content, status } = node;
+    const { node } = this.props;
+    const { title, content, status } = node;
     return (
       <>
-        <Col xs={12} md={4} className='node-cards-layout'>
+        <Col xs={12} md={4} className="node-cards-layout">
           <Row>
             <Col xs={7} md={7}>
               <Card>
                 <Card.Body>
                   <Form>
-                    <Form.Group controlId='exampleForm.ControlInput2'>
+                    <Form.Group controlId="exampleForm.ControlInput2">
                       <Form.Control
-                        type='text'
-                        placeholder='Title'
+                        type="text"
+                        placeholder="Title"
                         value={title}
-                        name='title'
+                        name="title"
                         onChange={this.handleChange}
                       />
-
                     </Form.Group>
-                    <Form.Group controlId='exampleForm.ControlTextarea1'>
+                    <Form.Group controlId="exampleForm.ControlTextarea1">
                       <Form.Control
-                        as='textarea'
-                        rows='12'
-                        name='content'
-                        placeholder='Content'
+                        as="textarea"
+                        rows="12"
+                        name="content"
+                        placeholder="Content"
                         value={content}
                         onChange={this.handleChange}
                       />
@@ -79,7 +78,7 @@ class NodeCard extends Component {
                 <Button
                   className={`overlay-btn-node btn-circle btn-sm `}
                   variant={status}
-                  name='status'
+                  name="status"
                   value={status}
                   onClick={this.handleClick}
                 >
@@ -87,16 +86,16 @@ class NodeCard extends Component {
                 </Button>
               </Card>
             </Col>
-            <Col xs={5} md={5} className='arrow-col'>
+            <Col xs={5} md={5} className="arrow-col">
               {this.props.showArrow && (
                 <img
                   style={{
-                    width: '100%',
-                    marginTop: 'auto',
-                    marginBottom: 'auto'
+                    width: "100%",
+                    marginTop: "auto",
+                    marginBottom: "auto",
                   }}
                   src={arrow_right}
-                  alt='Right Arrow'
+                  alt="Right Arrow"
                 />
               )}
             </Col>
